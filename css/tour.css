@@ -1,0 +1,184 @@
+/* Tour Overlay */
+body.tour-active {
+    overflow: hidden; /* Prevent scrolling while tour is active */
+}
+
+/* Invisible layer to block interactions with the page */
+#tour-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9990;
+    background: transparent;
+    display: none;
+    cursor: default;
+}
+
+#tour-backdrop.active {
+    display: block;
+}
+
+/* The element that highlights the target */
+#tour-highlight {
+    position: absolute;
+    z-index: 9999;
+    border-radius: 4px;
+    /* This huge shadow creates the dimming effect for the rest of the page */
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth, polished transition */
+    pointer-events: none; /* Allow clicks to pass through if we didn't have backdrop, but we do */
+    display: none;
+}
+
+#tour-highlight.active {
+    display: block;
+}
+
+/* Tooltip Card */
+.tour-tooltip {
+    position: absolute;
+    z-index: 10000;
+    background: #fff;
+    color: #2c2825;
+    padding: 24px;
+    border-radius: 12px;
+    width: 320px;
+    max-width: 90vw;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: none; /* Hidden by default */
+    font-family: var(--font-family-main, sans-serif);
+}
+
+.tour-tooltip.active {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+.tour-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.tour-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin: 0;
+    color: #3D352E;
+}
+
+.tour-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #999;
+    padding: 0;
+    margin-left: 10px;
+    transition: color 0.2s;
+}
+
+.tour-close:hover {
+    color: #333;
+}
+
+.tour-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    color: #555;
+    font-weight: 300;
+}
+
+.tour-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tour-progress {
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 500;
+}
+
+.tour-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.tour-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.tour-btn-secondary {
+    background: #f5f5f5;
+    color: #666;
+}
+.tour-btn-secondary:hover {
+    background: #e5e5e5;
+    color: #333;
+}
+.tour-btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tour-btn-primary {
+    background: #3D352E;
+    color: #EAE3D9;
+}
+.tour-btn-primary:hover {
+    background: #2c2825;
+    transform: translateY(-1px);
+}
+
+/* Start Button Style */
+.btn-start-tour {
+    margin-top: 30px;
+    padding: 14px 28px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-start-tour:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Tooltip Arrow (Optional, nice to have) */
+.tour-tooltip::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    transform: rotate(45deg);
+    /* Positioning will be handled in JS or via specific classes */
+}
