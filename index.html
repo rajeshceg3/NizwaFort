@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nizwa - A Fortified Experience</title>
+    <link rel="stylesheet" href="css/tour.css">
     <style>
         /*
         DESIGN PHILOSOPHY: The Unibody - REINFORCED
@@ -336,6 +337,13 @@
         <div class="hero-overlay"></div>
         <h1>NIZWA</h1>
         <p>The Guardian of Oman</p>
+        <button id="start-tour-btn" class="btn-start-tour">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:8px">
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 8L16 12L10 16V8Z" fill="currentColor"/>
+            </svg>
+            Start Guided Tour
+        </button>
         <div class="scroll-indicator"></div>
     </header>
 
@@ -444,6 +452,7 @@
         <p>Experience by Jony Ive. Fortified by Task Force Omega.</p>
     </footer>
 
+    <script src="js/tour.js"></script>
     <script>
         // JAVASCRIPT: The Conductor - REINFORCED
         // Assessor Notes:
@@ -476,6 +485,59 @@
                     document.body.classList.add('scrolled');
                 }
             }, { once: true }); // Use 'once' for performance.
+
+            // --- GUIDED TOUR INITIALIZATION ---
+            const tourSteps = [
+                {
+                    element: 'h1',
+                    title: 'Welcome to Nizwa Fort',
+                    content: 'Experience the grandeur of Oman’s most visited national monument. This guided tour will take you through the history, architecture, and hidden secrets of the fort.'
+                },
+                {
+                    element: '#history .text-container',
+                    title: 'Origins of Power',
+                    content: 'Built in the 17th century by Imam Sultan bin Saif Al Yarubi, the fort stands on foundations that date back to the 12th century, symbolizing the continuity of Omani strength.'
+                },
+                {
+                    element: '#approach .image-container',
+                    title: 'The Great Tower',
+                    content: 'The massive circular tower is 45 meters in diameter and 30 meters high. It is the largest of its kind in the Arabian Peninsula, built with earth and stone to withstand cannon fire.'
+                },
+                {
+                    element: '#defense .text-container',
+                    title: 'A Lethal Labyrinth',
+                    content: 'The fort was designed to be impenetrable. Narrow, twisting staircases prevented the use of battering rams, while "murder holes" above allowed defenders to pour boiling date syrup on attackers.'
+                },
+                {
+                    element: '#summit .image-container',
+                    title: 'Strategic Command',
+                    content: 'From the summit, defenders had a 360-degree view of the surrounding oasis and the Hajar Mountains. 24 cannons were positioned here to cover every possible approach.'
+                },
+                {
+                    element: '#museum .text-container',
+                    title: 'Cultural Heritage',
+                    content: 'Today, the fort serves as a museum, showcasing traditional Omani craftsmanship, including silver jewelry, copper ware, and the famous Omani Khanjar.'
+                },
+                {
+                    element: '.gallery-wrapper',
+                    title: 'Intricate Details',
+                    content: 'Explore the gallery to see the finer details of the fort, from the heavy wooden doors carved with geometric patterns to the artifacts of daily life used by the garrison.'
+                },
+                {
+                    element: '.plan-section .container',
+                    title: 'Plan Your Visit',
+                    content: 'Ready to visit? Check the opening hours and ticket prices. We recommend visiting early in the morning to enjoy the cool weather and explore the nearby Nizwa Souq.'
+                }
+            ];
+
+            const tour = new Tour(tourSteps);
+
+            const startBtn = document.getElementById('start-tour-btn');
+            if (startBtn) {
+                startBtn.addEventListener('click', () => {
+                    tour.start();
+                });
+            }
         });
     </script>
 </body>
